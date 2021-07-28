@@ -1,3 +1,8 @@
+(define-module (c10)
+  #:export (AES-cbc-encrypt))
+
+(add-to-load-path "./")
+
 (use-modules (rnrs bytevectors)
 	     (srfi srfi-1)
 	     ((ice-9 textual-ports) #:select (get-string-all))
@@ -18,7 +23,7 @@
     (do ((i 0 (+ i blocksize)))
 	((>= i text-length) encrypted)
       (bytevector-copy! padded-plain-text-bv i block 0 blocksize)
-      (bytevector-copy! (AES-ecb-encrypt (bytevector-logxor block iv-copy) key) i
+      (bytevector-copy! (AES-ecb-encrypt (bytevector-logxor block iv-copy) key) 0
 			encrypted i blocksize)
       (bytevector-copy! encrypted i iv-copy 0 blocksize))))
 
@@ -43,13 +48,14 @@
 	 (new-length (- bv-length pad))
 	 (bv1 (make-bytevector pad pad))
 	 (bv2 (make-bytevector pad)))
-    (bytevector-copy! bv new-length bv2 0 pad)
-    (if (bytevector=? bv1 bv2)
-	(let ((new-bv (make-bytevector new-length)))
-	  (bytevector-copy! bv 0 new-bv 0 new-length)
-	  new-bv)
-	bv)))
-
+    (cond ((< new-length 0) bv)
+	  (else
+	   (bytevector-copy! bv new-length bv2 0 pad)
+	   (if (bytevector=? bv1 bv2)
+	       (let ((new-bv (make-bytevector new-length)))
+		 (bytevector-copy! bv 0 new-bv 0 new-length)
+		 new-bv)
+	       bv)))))
 
 ;; Initial tests
 ;; (define plain-text-bv (u8-list->bytevector
@@ -74,6 +80,9 @@
 ;; (display (list->string (map integer->char (bytevector->u8-list decrypted-text-bv))))
 ;; (newline)
 
+(define key (u8-list->bytevector
+	     (map char->integer
+		  (string->list "YELLOW SUBMARINE"))))
 
 (define iv (u8-list->bytevector (make-list 16 0)))
 
