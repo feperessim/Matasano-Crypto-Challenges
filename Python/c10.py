@@ -78,14 +78,14 @@ def pkcs7_unpadding(byte_list, blocksize):
 # print(pkcs7_unpadding(decrypted_text, 16))
 
 
-with open('../text_files/10.txt', mode='r') as f:
-    encrypted_text = decode_base64(f.read().split())
+# with open('../text_files/10.txt', mode='r') as f:
+#     encrypted_text = decode_base64(f.read().split())
 
-key = ch_to_ord("YELLOW SUBMARINE")
-iv = [0]*16
-decrypted_text = AES_cbc_decrypt(encrypted_text, key, iv)
+# key = ch_to_ord("YELLOW SUBMARINE")
+# iv = [0]*16
+# decrypted_text = AES_cbc_decrypt(encrypted_text, key, iv)
 
-for ch in pkcs7_unpadding(decrypted_text, 16):
-    print(chr(ch), end='')
-print()
+# for ch in pkcs7_unpadding(decrypted_text, 16):
+#     print(chr(ch), end='')
+# print()
 

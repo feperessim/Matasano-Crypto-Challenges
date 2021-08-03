@@ -13,14 +13,9 @@ def decode_base64(list_str_b64):
     '''
     b64_map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
     decoded = []
-    # padding = len(hex_byte_list) % 3
-    # hex_byte_list = hex_byte_list + [0 for _ in range(3 - padding) if padding > 0]
-    # b64_str = ''
+
     for b64_str in list_str_b64:
         indexes = [b64_map.index(ch) if ch != '=' else 0 for ch in b64_str]
-        # decoded = []
-        #print(len(decoded))
-        #print(len(indexes))
         for i in range(0, len(indexes), 4):
             decoded.append(((indexes[i] & 0x3f) << 0x02) | ((indexes[i+1] & 0x30) >> 0x04))
             decoded.append(((indexes[i+1] & 0x0f) << 0x04) | ((indexes[i+2] & 0x3c) >> 0x02))
@@ -165,7 +160,7 @@ def brute_force_xor_blocks(encrypted_lines):
         key.append(brute_force_xor(chunk)[0])
     return key
 
-
+# Tests
 # for i in range(2, 41):
 #     chunks = break_into_chunks(decoded_encrypted_lines, i)
 #     print(avg_norm_hamming_distance(chunks, i))
@@ -177,13 +172,13 @@ def brute_force_xor_blocks(encrypted_lines):
 # print(dist)
 # assert dist == 37
 
-with open('../text_files/6.txt', 'r') as f:
-    encrypted_lines = f.read().split()
+# with open('../text_files/6.txt', 'r') as f:
+#     encrypted_lines = f.read().split()
 
-key = brute_force_xor_blocks(encrypted_lines)
-decoded_encrypted_lines = decode_base64(encrypted_lines)
-decrypted = repeating_xor(decoded_encrypted_lines, key)
+# key = brute_force_xor_blocks(encrypted_lines)
+# decoded_encrypted_lines = decode_base64(encrypted_lines)
+# decrypted = repeating_xor(decoded_encrypted_lines, key)
 
-print('Key: ', ''.join([chr(ch) for ch in key]))
-print('Decrypted text')
-print(''.join([chr(ch) for ch in decrypted]))
+# print('Key: ', ''.join([chr(ch) for ch in key]))
+# print('Decrypted text')
+# print(''.join([chr(ch) for ch in decrypted]))

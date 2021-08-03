@@ -58,25 +58,25 @@ def detect_block_cipher_mode(encrypted):
     return int(len(chunks) - len(set(map(str, chunks))) > 0)
 
 
-def tests():
-    y_true = []
-    y_pred = []
-    for _ in range(1000):
-        plain_text = 37*[ord('a')]
-        #for _ in range(random.randint(100,200)):
-        # plain_text += gen_rand_aes_key()
-        encrypted, y = encryption_oracle(plain_text)
-        yhat = detect_block_cipher_mode(encrypted)
-        y_true.append(y)
-        y_pred.append(yhat)
-    acc = 0
-    total = len(y_true)
-    counter = Counter({'tn':0, 'fp':0, 'fn':0, 'tp':0})
-    for i in range(total):
-        acc += int(y_true[i] == y_pred[i])
+# def tests():
+#     y_true = []
+#     y_pred = []
+#     for _ in range(1000):
+#         plain_text = 37*[ord('a')]
+#         #for _ in range(random.randint(100,200)):
+#         # plain_text += gen_rand_aes_key()
+#         encrypted, y = encryption_oracle(plain_text)
+#         yhat = detect_block_cipher_mode(encrypted)
+#         y_true.append(y)
+#         y_pred.append(yhat)
+#     acc = 0
+#     total = len(y_true)
+#     counter = Counter({'tn':0, 'fp':0, 'fn':0, 'tp':0})
+#     for i in range(total):
+#         acc += int(y_true[i] == y_pred[i])
         
-    print('Accuraccy: ', str(acc/total * 100) + '%')
-    return y_true, y_pred
+#     print('Accuraccy: ', str(acc/total * 100) + '%')
+#     return y_true, y_pred
 
-y_true, y_pred = tests()
+# y_true, y_pred = tests()
 
