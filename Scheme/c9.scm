@@ -13,11 +13,11 @@
     bv-padded))
 
 
-(define key (u8-list->bytevector
-	     (map char->integer
-		  (string->list "YELLOW SUBMARINE"))))
+;; (define key (u8-list->bytevector
+;; 	     (map char->integer
+;; 		  (string->list "YELLOW SUBMARINE"))))
 				    		    
-(define blocksize 20)
+;; (define blocksize 20)
 
-(display (pkcs7-padding key blocksize))
+;; (display (pkcs7-padding key blocksize))
   

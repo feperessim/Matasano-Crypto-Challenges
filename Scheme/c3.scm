@@ -97,26 +97,26 @@
 
 
 
-(define hex-enc-bv
-  (encode-hex "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"))
-;;(define ascii-scores-map (make-hash-table))
-(define letter-freq-map (make-hash-table)) ;; English unigram frequency map
-(define keys (u8-list->bytevector (iota 256 0)))   ;; ascii decimal map
-(populate-letter-freq-map letter-freq-map) ;; Populate letter-freq-map
+;; (define hex-enc-bv
+;;   (encode-hex "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"))
+;; ;;(define ascii-scores-map (make-hash-table))
+;; (define letter-freq-map (make-hash-table)) ;; English unigram frequency map
+;; (define keys (u8-list->bytevector (iota 256 0)))   ;; ascii decimal map
+;; (populate-letter-freq-map letter-freq-map) ;; Populate letter-freq-map
 
-(define best-key-score
-  (brute-force-xor hex-enc-bv letter-freq-map keys))
+;; (define best-key-score
+;;   (brute-force-xor hex-enc-bv letter-freq-map keys))
 
 
-(display "Best key: ")
-(display (first best-key-score))
-(newline)
-(display "Best Score: ")
-(display (second best-key-score))
-(newline)
-(display "Message: ")
-(display (utf8->string (byte-vector-logxor hex-enc-bv (first best-key-score))))
-(newline)
+;; (display "Best key: ")
+;; (display (first best-key-score))
+;; (newline)
+;; (display "Best Score: ")
+;; (display (second best-key-score))
+;; (newline)
+;; (display "Message: ")
+;; (display (utf8->string (byte-vector-logxor hex-enc-bv (first best-key-score))))
+;; (newline)
 
 ;; (string=? "Cooking MC's like a pound of bacon" (utf8->string (byte-vector-logxor hex-enc-bv (first best-key-score))))
 

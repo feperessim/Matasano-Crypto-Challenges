@@ -32,7 +32,7 @@ def encryption_oracle_ecb(plain_text, key):
     return encrypted
 
 
-def find_block_size():
+def find_blocksize():
     '''
     Figure out the blocksize of encrytion
     function is using.
@@ -63,11 +63,10 @@ def byte_at_a_time_ecb_simple():
     returns:
         (list of 8 bit integers)
     '''
-    blocksize = find_block_size()
+    blocksize = find_blocksize()
     key = gen_rand_aes_key()
     recovered = []
     n_blocks = len(encryption_oracle_ecb([], key)) // blocksize
-    length = len(encryption_oracle_ecb([], key))
 
     for i in range(n_blocks):
         start = i*blocksize

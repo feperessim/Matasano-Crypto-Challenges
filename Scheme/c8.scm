@@ -17,27 +17,27 @@
   (loop values 0 (car values) 0))
 	 
 
-(define strings (read-strings-from-file "../text_files/8.txt"))
+;; (define strings (read-strings-from-file "../text_files/8.txt"))
 
 
-(define distances
-  (map (lambda (string)
-	 (length
-	  (delete-duplicates
-	   (map bytevector->u8-list
-		(break-into-chunks
-		 (decode-base64 string) 16)))))
-       strings))
+;; (define distances
+;;   (map (lambda (string)
+;; 	 (length
+;; 	  (delete-duplicates
+;; 	   (map bytevector->u8-list
+;; 		(break-into-chunks
+;; 		 (decode-base64 string) 16)))))
+;;        strings))
 
 
-(define index (arg-min distances))
+;; (define index (arg-min distances))
 
-(display "String encrypted with AES in ECB mode")
-(newline)
-(newline)
-(display (list-ref strings index))
-(newline)
-(newline)
+;; (display "String encrypted with AES in ECB mode")
+;; (newline)
+;; (newline)
+;; (display (list-ref strings index))
+;; (newline)
+;; (newline)
 
 
 

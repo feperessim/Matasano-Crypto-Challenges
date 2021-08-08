@@ -1,5 +1,6 @@
 (define-module (c10)
-  #:export (AES-cbc-encrypt))
+  #:export (AES-cbc-encrypt)
+  #:export (pkcs7-unpadding))
 
 (add-to-load-path "./")
 
@@ -80,24 +81,24 @@
 ;; (display (list->string (map integer->char (bytevector->u8-list decrypted-text-bv))))
 ;; (newline)
 
-(define key (u8-list->bytevector
-	     (map char->integer
-		  (string->list "YELLOW SUBMARINE"))))
+;; (define key (u8-list->bytevector
+;; 	     (map char->integer
+;; 		  (string->list "YELLOW SUBMARINE"))))
 
-(define iv (u8-list->bytevector (make-list 16 0)))
+;; (define iv (u8-list->bytevector (make-list 16 0)))
 
-(define encrypted-text
-  (string-filter
-   (call-with-input-file "../text_files/10.txt" get-string-all)
-   (lambda (ch) (not (char=? ch #\newline)))))
+;; (define encrypted-text
+;;   (string-filter
+;;    (call-with-input-file "../text_files/10.txt" get-string-all)
+;;    (lambda (ch) (not (char=? ch #\newline)))))
 
-(define decoded-encrypted-text
-  (decode-base64 encrypted-text))
+;; (define decoded-encrypted-text
+;;   (decode-base64 encrypted-text))
 
-(define decrypted-text-bv (AES-cbc-decrypt decoded-encrypted-text key iv))
+;; (define decrypted-text-bv (AES-cbc-decrypt decoded-encrypted-text key iv))
 
-(display "Decrypted text:")
-(newline)
-(newline)
-(display (list->string (map integer->char (bytevector->u8-list decrypted-text-bv))))
+;; (display "Decrypted text:")
+;; (newline)
+;; (newline)
+;; (display (list->string (map integer->char (bytevector->u8-list decrypted-text-bv))))
 

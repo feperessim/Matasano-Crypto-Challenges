@@ -1,3 +1,6 @@
+(define-module (c11)
+  #:export (gen-rand-aes-key))
+
 (add-to-load-path "./")
 
 (use-modules (rnrs bytevectors)

@@ -277,21 +277,21 @@
       (bytevector-copy! (AES-Decrypt block key) 0 decrypted i nb-sq))))
 
 
-(define encrypted-text
-  (string-filter
-   (call-with-input-file "../text_files/7.txt" get-string-all)
-   (lambda (ch) (not (char=? ch #\newline)))))
+;; (define encrypted-text
+;;   (string-filter
+;;    (call-with-input-file "../text_files/7.txt" get-string-all)
+;;    (lambda (ch) (not (char=? ch #\newline)))))
 
-(define decoded-encrypted-text
-  (decode-base64 encrypted-text))
+;; (define decoded-encrypted-text
+;;   (decode-base64 encrypted-text))
 
-(define key (u8-list->bytevector
-	     (map char->integer
-		  (string->list "YELLOW SUBMARINE"))))
+;; (define key (u8-list->bytevector
+;; 	     (map char->integer
+;; 		  (string->list "YELLOW SUBMARINE"))))
 
-(define decrypted-text (AES-ecb-decrypt decoded-encrypted-text key))
+;; (define decrypted-text (AES-ecb-decrypt decoded-encrypted-text key))
 
-(display "Decrypted text:")
-(newline)
-(newline)
-(display (list->string (map integer->char (bytevector->u8-list decrypted-text))))
+;; (display "Decrypted text:")
+;; (newline)
+;; (newline)
+;; (display (list->string (map integer->char (bytevector->u8-list decrypted-text))))
