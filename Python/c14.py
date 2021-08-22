@@ -44,7 +44,6 @@ def byte_at_a_time_ecb_simple():
     for i in range(n_blocks):
         start = i*blocksize + blocksize
         end = start + blocksize
-
         for k in range(1, blocksize+1):
             input_block = prefix_complete_block + [ord('A')]*(blocksize - k)
             encrypted = encryption_oracle_ecb(input_block, key)[start:end]
