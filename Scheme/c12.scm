@@ -1,3 +1,6 @@
+(define-module (c12)
+  #:export (find-blocksize))
+
 (add-to-load-path "./")
 
 (use-modules (rnrs bytevectors)
@@ -69,7 +72,7 @@
 		       (set! recovered (append! recovered (list j)))))))))))))
 
 
-(define result (byte-at-a-time-ecb-simple))
+;; (define result (byte-at-a-time-ecb-simple))
 
-(display (list->string (map integer->char (bytevector->u8-list result))))
+;; (display (list->string (map integer->char (bytevector->u8-list result))))
 

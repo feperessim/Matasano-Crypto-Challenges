@@ -1,5 +1,6 @@
 (define-module (c11)
-  #:export (gen-rand-aes-key))
+  #:export (gen-rand-aes-key
+	    gen-random-sequence))
 
 (add-to-load-path "./")
 
