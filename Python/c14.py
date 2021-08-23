@@ -26,7 +26,7 @@ def encryption_oracle_ecb(plain_text, key):
     return encrypted
 
 
-def byte_at_a_time_ecb_simple():
+def byte_at_a_time_ecb_harder():
     '''
     Break encrypted text in AES ecb mode
     Args:
@@ -85,7 +85,7 @@ def find_prefix_size(blocksize):
 random_prefix = gen_rand_aes_key()[:random.randint(1, 16)]
 tmp = encryption_oracle_ecb(list(map(ord, ['A']*64)), gen_rand_aes_key())
 assert detect_block_cipher_mode(tmp) == 1
-recovered = byte_at_a_time_ecb_simple()
+recovered = byte_at_a_time_ecb_harder()
 decrypted = ''.join(list(map(chr, recovered)))
 print(decrypted)
 

@@ -19,7 +19,6 @@
 		(error "Bad padding"))))))
 
 ;; tests
-
 (define blocksize 16)
 (define text-bv (u8-list->bytevector
 		       (map char->integer

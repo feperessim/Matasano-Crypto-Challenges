@@ -47,7 +47,7 @@
     (loop previous-enc 1 count key)))
 
 
-(define (byte-at-a-time-ecb-simple)
+(define (byte-at-a-time-ecb-harder)
   (let* ((blocksize (find-blocksize))
 	 (key (gen-rand-aes-key))
 	 (length-output
@@ -84,7 +84,7 @@
 			      (set! recovered (append! recovered (list j)))))))))))))))
 
 
-(define result (byte-at-a-time-ecb-simple))
+(define result (byte-at-a-time-ecb-harder))
 
 (display (list->string (map integer->char (bytevector->u8-list result))))
 
