@@ -38,7 +38,7 @@ def AES_cbc_decrypt(encrypted_text, key, iv):
     '''
     decrypted = []
     blocksize = 16
-        
+
     for i in range(0, len(encrypted_text), blocksize):
         to_decrypt = encrypted_text[i:i+blocksize]
         decrypted_xor = byte_lists_xor(AES_ecb_decrypt(to_decrypt, key), iv)

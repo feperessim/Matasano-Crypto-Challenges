@@ -1,5 +1,6 @@
 (define-module (c10)
   #:export (AES-cbc-encrypt)
+  #:export (AES-cbc-decrypt)
   #:export (pkcs7-unpadding))
 
 (add-to-load-path "./")

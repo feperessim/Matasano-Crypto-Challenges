@@ -12,14 +12,16 @@ def AES_ecb_encrypt(plain_text, key):
     cipher = AES.new(bytes(key), AES.MODE_ECB)
     return list(cipher.encrypt(bytes(plain_text)))
 
+
 def encryption_oracle_ecb(plain_text, key):
     '''
-    Encrypts data under an unknown key
+    Encrypts data with AES in ECB mode under
+    an unknown key
     Args:
         plain_text (list) : sequence of bytes
         key (list) : sequence of bytes
     returns:
-        encrypted (list) : sequence of bytes,
+        encrypted (list) : sequence of bytes
     '''
     secret = ('Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg'
               'aGFpciBjYW4gYmxvdwpUaGUgZ2lybGllcyBvbiBzdGFuZGJ5IHdhdmluZyBq'

@@ -24,19 +24,19 @@ def pkcs7_unpadding(byte_list, blocksize):
 
 
 # tests
-blocksize = 16
-text = "ICE ICE BABY\x04\x04\x04\x04"
-byte_list = [ord(ch) for ch in text]
-print(pkcs7_unpadding(byte_list, blocksize))
+# blocksize = 16
+# text = "ICE ICE BABY\x04\x04\x04\x04"
+# byte_list = [ord(ch) for ch in text]
+# print(pkcs7_unpadding(byte_list, blocksize))
 
-text = "ICE ICE BABY\x05\x05\x05\x05"
-byte_list = [ord(ch) for ch in text]
-print(pkcs7_unpadding(byte_list, blocksize))
+# text = "ICE ICE BABY\x05\x05\x05\x05"
+# byte_list = [ord(ch) for ch in text]
+# print(pkcs7_unpadding(byte_list, blocksize))
 
-text = "ICE ICE BABY\x05\x05\x05\x4D"
-byte_list = [ord(ch) for ch in text]
-print(pkcs7_unpadding(byte_list, blocksize))
+# text = "ICE ICE BABY\x05\x05\x05\x4D"
+# byte_list = [ord(ch) for ch in text]
+# print(pkcs7_unpadding(byte_list, blocksize))
 
-text = "ICE ICE BABY"
-byte_list = [ord(ch) for ch in text]
-print(pkcs7_unpadding(byte_list, blocksize))
+# text = "ICE ICE BABY"
+# byte_list = [ord(ch) for ch in text]
+# print(pkcs7_unpadding(byte_list, blocksize))
