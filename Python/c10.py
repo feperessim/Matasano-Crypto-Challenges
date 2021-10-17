@@ -34,7 +34,7 @@ def AES_cbc_decrypt(encrypted_text, key, iv):
        key (list) : sequence of bytes
        iv (list) : sequence of bytes
     returns:
-       encrypted (list) : sequence of bytes
+       decrypted (list) : sequence of bytes
     '''
     decrypted = []
     blocksize = 16
