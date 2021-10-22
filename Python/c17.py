@@ -1,5 +1,6 @@
 import random
 
+from c6 import byte_lists_xor, decode_base64
 from c7 import ch_to_ord
 from c10 import AES_cbc_encrypt, AES_cbc_decrypt
 from c11 import gen_rand_aes_key
@@ -29,7 +30,7 @@ def CBC_padding_oracle_encrypt(strings):
         encrypted (list) : sequence of bytes
         iv (list) : sequence of bytes
     '''
-    random_index = random.randint(0, 9)
+    random_index = random.randint(0, 8)
     iv = gen_rand_aes_key()
     plain_text = ch_to_ord(strings[random_index])
     encrypted = AES_cbc_encrypt(plain_text, key, iv)
@@ -49,7 +50,60 @@ def CBC_padding_oracle_decrypt(encrypted_text, iv):
     '''
     blocksize = 16
     decrypted = AES_cbc_decrypt(encrypted_text, key, iv)
-    unpadded = pkcs7_unpadding(decrypted, blocksize)
 
-    return unpadded
+    try:
+        unpadded = pkcs7_unpadding(decrypted, blocksize)
+        return True
+    except Exception:
+        return False
 
+
+def ord_to_ch(byte_list):
+    '''
+    Converts all bytes in a list
+    to a string of chars
+    args:
+        byte_list : (list)
+    returns:
+        (str)
+    '''
+    return ''.join(map(lambda x: chr(x), byte_list))
+
+
+def CBC_padding_attack():
+    '''
+    Perfoms the CBC padding attack
+    on a randomly select string from
+    strings list.
+    return the random selected text
+    decrypted.
+    args:
+    returns:
+        plain_text : (str)
+    '''
+    encrypted, iv = CBC_padding_oracle_encrypt(strings)
+    blocksize = 16
+    i_state = [0] * blocksize
+    plain_text = []
+    block = gen_rand_aes_key()
+
+    for block_index in range(0, len(encrypted), blocksize):
+        padding = 0x01
+        for i in range(blocksize-1, -1, -1):
+            next_block = encrypted[block_index: block_index + blocksize]
+            block = block[:16] + next_block
+            for byte in range(256):
+                block[i] = byte
+                valid_padding = CBC_padding_oracle_decrypt(block, iv)
+                if valid_padding:
+                    i_state[i] = byte ^ padding
+                    padding += 1
+                    break
+            for k in range(1, padding):
+                block[blocksize-k] = i_state[blocksize-k] ^ padding
+        plain_text.extend(byte_lists_xor(i_state, iv))
+        iv = encrypted[block_index: block_index+blocksize]
+    plain_text = pkcs7_unpadding(plain_text, blocksize)
+    plain_text = ord_to_ch(decode_base64([ord_to_ch(plain_text)]))
+
+    return plain_text
