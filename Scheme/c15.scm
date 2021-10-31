@@ -23,27 +23,27 @@
 		(error "Bad padding"))))))
 
 ;; tests
-(define blocksize 16)
-(define text-bv (u8-list->bytevector
-		       (map char->integer
-			    (string->list "ICE ICE BABY\x04\x04\x04\x04"))))
-(newline)
-(display (pkcs7-unpadding text-bv blocksize))
+;; (define blocksize 16)
+;; (define text-bv (u8-list->bytevector
+;; 		       (map char->integer
+;; 			    (string->list "ICE ICE BABY\x04\x04\x04\x04"))))
+;; (newline)
+;; (display (pkcs7-unpadding text-bv blocksize))
 
-(define text-bv (u8-list->bytevector
-		       (map char->integer
-			    (string->list "ICE ICE BABY\x05\x05\x05\x05"))))
-(newline)
-(display (pkcs7-unpadding text-bv blocksize))
+;; (define text-bv (u8-list->bytevector
+;; 		       (map char->integer
+;; 			    (string->list "ICE ICE BABY\x05\x05\x05\x05"))))
+;; (newline)
+;; (display (pkcs7-unpadding text-bv blocksize))
 
-(define text-bv (u8-list->bytevector
-		       (map char->integer
-			    (string->list "ICE ICE BABY\x05\x05\x05\x4D"))))
-(newline)
-(display (pkcs7-unpadding text-bv blocksize))
+;; (define text-bv (u8-list->bytevector
+;; 		       (map char->integer
+;; 			    (string->list "ICE ICE BABY\x05\x05\x05\x4D"))))
+;; (newline)
+;; (display (pkcs7-unpadding text-bv blocksize))
 
-(define text-bv (u8-list->bytevector
-		       (map char->integer
-			    (string->list "ICE ICE BABY"))))
-(newline)
-(display (pkcs7-unpadding text-bv blocksize))
+;; (define text-bv (u8-list->bytevector
+;; 		       (map char->integer
+;; 			    (string->list "ICE ICE BABY"))))
+;; (newline)
+;; (display (pkcs7-unpadding text-bv blocksize))

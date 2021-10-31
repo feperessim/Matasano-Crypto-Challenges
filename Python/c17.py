@@ -21,16 +21,15 @@ strings = ["MDAwMDAwTm93IHRoYXQgdGhlIHBhcnR5IGlzIGp1bXBpbmc=",
 key = gen_rand_aes_key()
 
 
-def CBC_padding_oracle_encrypt(strings):
+def cbc_padding_oracle_encrypt():
     '''
     Encrypts a random string with AES in CBC mode
     Args:
-        plain_text (list) : sequence of bytes
     returns:
         encrypted (list) : sequence of bytes
         iv (list) : sequence of bytes
     '''
-    random_index = random.randint(0, 8)
+    random_index = random.randint(0, len(strings) - 1)
     iv = gen_rand_aes_key()
     plain_text = ch_to_ord(strings[random_index])
     encrypted = AES_cbc_encrypt(plain_text, key, iv)
@@ -38,21 +37,21 @@ def CBC_padding_oracle_encrypt(strings):
     return (encrypted, iv)
 
 
-def CBC_padding_oracle_decrypt(encrypted_text, iv):
+def cbc_padding_oracle_decrypt(encrypted, iv):
     '''
     Decrypt an encrypted text with AES 128
     in Cipher Block Chaining (CBC) mode.
     Args:
-       encrypted_text (list) : sequence of bytes
+       encrypted (list) : sequence of bytes
        iv (list) : sequence of bytes
     returns:
        decrypted (list) : sequence of bytes
     '''
     blocksize = 16
-    decrypted = AES_cbc_decrypt(encrypted_text, key, iv)
+    decrypted = AES_cbc_decrypt(encrypted, key, iv)
 
     try:
-        unpadded = pkcs7_unpadding(decrypted, blocksize)
+        pkcs7_unpadding(decrypted, blocksize)
         return True
     except Exception:
         return False
@@ -70,7 +69,7 @@ def ord_to_ch(byte_list):
     return ''.join(map(lambda x: chr(x), byte_list))
 
 
-def CBC_padding_attack():
+def cbc_padding_attack():
     '''
     Perfoms the CBC padding attack
     on a randomly select string from
@@ -81,7 +80,7 @@ def CBC_padding_attack():
     returns:
         plain_text : (str)
     '''
-    encrypted, iv = CBC_padding_oracle_encrypt(strings)
+    encrypted, iv = cbc_padding_oracle_encrypt()
     blocksize = 16
     i_state = [0] * blocksize
     plain_text = []
@@ -89,12 +88,12 @@ def CBC_padding_attack():
 
     for block_index in range(0, len(encrypted), blocksize):
         padding = 0x01
+        next_block = encrypted[block_index: block_index + blocksize]
+        block = block[:blocksize] + next_block
         for i in range(blocksize-1, -1, -1):
-            next_block = encrypted[block_index: block_index + blocksize]
-            block = block[:16] + next_block
             for byte in range(256):
                 block[i] = byte
-                valid_padding = CBC_padding_oracle_decrypt(block, iv)
+                valid_padding = cbc_padding_oracle_decrypt(block, iv)
                 if valid_padding:
                     i_state[i] = byte ^ padding
                     padding += 1

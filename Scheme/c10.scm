@@ -37,7 +37,7 @@
 	 (decrypted (make-bytevector text-length))
 	 (block (make-bytevector blocksize)))
     (do ((i 0 (+ i blocksize)))
-	((>= i text-length) (pkcs7-unpadding decrypted blocksize))
+	((>= i text-length) decrypted)
       (bytevector-copy! encrypted-text-bv i block 0 blocksize)
       (bytevector-copy! (bytevector-logxor (AES-ecb-decrypt block key) iv-copy) 0
 			decrypted i blocksize)
@@ -77,7 +77,7 @@
 ;; (display encrypted-text-bv)
 ;; (newline)
 
-;; (define decrypted-text-bv (AES-cbc-decrypt encrypted-text-bv key iv))
+;; (define decrypted-text-bv (pkcs7-unpadding (AES-cbc-decrypt encrypted-text-bv key iv) 16))
 
 ;; (display (list->string (map integer->char (bytevector->u8-list decrypted-text-bv))))
 ;; (newline)
@@ -96,7 +96,7 @@
 ;; (define decoded-encrypted-text
 ;;   (decode-base64 encrypted-text))
 
-;; (define decrypted-text-bv (AES-cbc-decrypt decoded-encrypted-text key iv))
+;; (define decrypted-text-bv (pkcs7-unpadding (AES-cbc-decrypt decoded-encrypted-text key iv) 16))
 
 ;; (display "Decrypted text:")
 ;; (newline)
