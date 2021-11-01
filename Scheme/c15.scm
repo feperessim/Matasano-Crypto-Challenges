@@ -12,7 +12,8 @@
 	 (bv1 (make-bytevector pad pad))
 	 (bv2 (make-bytevector pad)))
     (cond ((or (< new-length 0)
-	       (not (= (remainder bv-length blocksize) 0)))
+	       (not (= (remainder bv-length blocksize) 0))
+	       (= (bytevector-u8-ref bv (- bv-length 1)) 0))
 	   (error "Bad padding"))
 	   (else
 	    (bytevector-copy! bv new-length bv2 0 pad)
