@@ -31,13 +31,12 @@ def AES_ctr_encrypt(plain_text, key, nonce):
 def AES_ctr_decrypt(encrypted_text, key, nonce):
     '''
     Decrypt an encrypted text with AES 128
-    in in CTR - The  Counter mode.
+    in CTR - The  Counter mode.
     Args:
        encrypted_text (list) : sequence of bytes
        key (list) : sequence of bytes
-       iv (list) : sequence of bytes
+       nonce (int) : integer
     returns:
-       decrypted (list) : sequence of bytes
     '''
     return AES_ctr_encrypt(encrypted_text, key, nonce)
 
