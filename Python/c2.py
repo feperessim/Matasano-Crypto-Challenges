@@ -1,4 +1,3 @@
-#from c1 import encode_hex
 from c1 import encode_hex
 
 def byte_list_xor(byte_list1, byte_list2):

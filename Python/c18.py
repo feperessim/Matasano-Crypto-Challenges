@@ -17,7 +17,7 @@ def AES_ctr_encrypt(plain_text, key, nonce):
     counter = 0
     encrypted = []
     nonce_bytes = nonce.to_bytes(length=8, byteorder='little')
-    
+
     for i in range(0, len(plain_text), blocksize):
         block = nonce_bytes + counter.to_bytes(length=8, byteorder='little')
         enc = AES_ecb_encrypt(list(block), key)
