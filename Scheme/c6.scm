@@ -2,7 +2,8 @@
   #:export (decode-base64
 	    hamming-distance
 	    break-into-chunks
-	    bytevector-logxor))
+	    bytevector-logxor
+	    transpose))
   
 (add-to-load-path "./")
 

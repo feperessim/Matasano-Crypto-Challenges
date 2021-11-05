@@ -1,3 +1,6 @@
+(define-module (c18)
+  #:export (AES-ctr-encrypt))
+
 (add-to-load-path "./")
 
 (use-modules (rnrs bytevectors)
