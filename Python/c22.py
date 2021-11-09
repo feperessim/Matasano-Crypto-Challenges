@@ -29,5 +29,5 @@ if __name__ == '__main__':
             break
         now -= 1
 
-    if seed == -1:
+    if recovered_seed == -1:
         print('Could not recover the seed.')
