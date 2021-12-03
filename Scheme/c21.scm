@@ -1,3 +1,6 @@
+(define-module (c21)
+  #:export (MT19937))
+
 (add-to-load-path "./")
 
 (use-modules (rnrs bytevectors))
@@ -76,30 +79,30 @@
 	   (generate-prng-proc w n m r a u d s b t c l f)))))
 
 
+;; tests
+;; (define random-proc (MT19937 47 #f)) ;; 32-bit
+;; (for-each (lambda (x) (display x) (newline))
+;; 	  (list (random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)))
 
-(define random (MT19937 47 #f)) ;; 32-bit
-(for-each (lambda (x) (display x) (newline))
-	  (list (random)
-		(random)
-		(random)
-		(random)
-		(random)
-		(random)
-		(random)
-		(random)
-		(random)
-		(random)))
-
-(newline)
-(define random (MT19937 47 #t)) ;; 64-bit
-(for-each (lambda (x) (display x) (newline))
-	  (list (random)
-		(random)
-		(random)
-		(random)
-		(random)
-		(random)
-		(random)
-		(random)
-		(random)
-		(random)))
+;; (newline)
+;; (define random (MT19937 47 #t)) ;; 64-bit
+;; (for-each (lambda (x) (display x) (newline))
+;; 	  (list (random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)
+;; 		(random-proc)))
